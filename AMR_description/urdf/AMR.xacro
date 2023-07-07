@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<robot name="AMR" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find AMR_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find AMR_description)/urdf/AMR.trans" />
+<xacro:include filename="$(find AMR_description)/urdf/AMR.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.12585811187431825 -0.009991615638865326 0.1262502208562287" rpy="0 0 0"/>
+    <mass value="2.026999464151311"/>
+    <inertia ixx="0.078309" iyy="0.015868" izz="0.092107" ixy="-7.9e-05" iyz="0.004162" ixz="3.3e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://AMR_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://AMR_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin xyz="-0.0447517053927417 6.088811528953686e-05 -0.00034877946676536986" rpy="0 0 0"/>
+    <mass value="0.6801302658096016"/>
+    <inertia ixx="0.001862" iyy="0.001107" izz="0.001107" ixy="-1e-06" iyz="-0.0" ixz="6e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.260866 0.217077 -0.076813" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://AMR_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.260866 0.217077 -0.076813" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://AMR_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel_1">
+  <inertial>
+    <origin xyz="0.04455099380563 -6.044403907465301e-05 -7.601174263900667e-05" rpy="0 0 0"/>
+    <mass value="0.6801302658095815"/>
+    <inertia ixx="0.001862" iyy="0.001107" izz="0.001107" ixy="-1e-06" iyz="0.0" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.008707 0.216475 -0.076317" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://AMR_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.008707 0.216475 -0.076317" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://AMR_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="steering_link_1">
+  <inertial>
+    <origin xyz="-0.0002081496977963948 -0.023427588808987293 -0.020942564923926404" rpy="0 0 0"/>
+    <mass value="0.1824412877769118"/>
+    <inertia ixx="0.000476" iyy="0.005928" izz="0.005944" ixy="2.3e-05" iyz="1e-06" ixz="7e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.12559 -0.19821 -0.099574" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://AMR_description/meshes/steering_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.12559 -0.19821 -0.099574" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://AMR_description/meshes/steering_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Revolute 1" type="continuous">
+  <origin xyz="-0.260866 -0.217077 0.076813" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="0.999969 -0.001358 0.007801"/>
+</joint>
+
+<joint name="Revolute 2" type="continuous">
+  <origin xyz="0.008707 -0.216475 0.076317" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_1"/>
+  <axis xyz="-0.999998 0.001357 0.001712"/>
+</joint>
+
+<joint name="Revolute 3" type="continuous">
+  <origin xyz="-0.12559 0.19821 0.099574" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="steering_link_1"/>
+  <axis xyz="-0.0 -8.9e-05 1.0"/>
+</joint>
+
+</robot>
